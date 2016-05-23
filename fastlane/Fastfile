@@ -214,7 +214,7 @@ private_lane :fabric do |options|
   )
 
   # Setting up testers groups for notifications
-  crashlytics_groups = ['test-group'] 
+  crashlytics_groups = ['testers'] 
   custom_crashlytics_groups_string = ENV['FABRIC_GROUPS']
   if custom_crashlytics_groups_string != nil
     custom_crashlytics_groups = custom_crashlytics_groups_string.split(',')
