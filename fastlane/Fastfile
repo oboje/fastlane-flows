@@ -147,7 +147,6 @@ private_lane :ftp do |options|
   @name = ENV['APP_NAME']
   @name ||= @app_identifier
   @result = ''
-  scheme = ENV['ENTERPRISE_SCHEME']
   xcodeproj_name = ENV['XCODEPROJ_NAME']
 
   # Checking out the passed branch
@@ -156,7 +155,7 @@ private_lane :ftp do |options|
   # Refreshing provisioning profile
   extension_ids = options[:extension_identifiers]
   if extension_ids != nil
-    make_provisioning_profiles_all_right(scheme,options,false)
+    make_provisioning_profiles_all_right('Release',options,false)
   else
     sigh
   end
@@ -167,7 +166,7 @@ private_lane :ftp do |options|
   badge(shield: shield_data, dark: true)
 
   # Building the ipa file of the enterprise build
-  gym(scheme: scheme,
+  gym(scheme: ENV['SCHEME'],
     use_legacy_build_api: true,
     export_method: 'enterprise'
   )
@@ -202,7 +201,7 @@ private_lane :fabric do |options|
   # Refreshing provisioning profile
   extension_ids = options[:extension_identifiers]
   if extension_ids != nil
-    make_provisioning_profiles_all_right(ENV['SCHEME'],options,true)
+    make_provisioning_profiles_all_right('Release',options,true)
   else
     sigh(adhoc: true)
   end
@@ -240,7 +239,7 @@ private_lane :apple_testflight do |options|
   # Refreshing provisioning profile
   extension_ids = options[:extension_identifiers]
   if extension_ids != nil
-    make_provisioning_profiles_all_right(ENV['SCHEME'],options,true)
+    make_provisioning_profiles_all_right('Release',options,true)
   else
     sigh
   end
