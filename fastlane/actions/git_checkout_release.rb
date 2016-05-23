@@ -12,6 +12,7 @@ module Fastlane
         result_branch = ""
         
         Actions.sh("git fetch")
+        Actions.sh("git pull")
         branch_list = Actions.sh("git show-branch --list")
         
         result_branch = release_branch if branch_list.include? release_branch
@@ -23,11 +24,8 @@ module Fastlane
           Actions.sh("git checkout #{result_branch}")
           Actions.sh("git push --set-upstream origin #{result_branch}")
         else
-          Actions.sh("git push --set-upstream origin #{result_branch}")
-          Actions.sh("git checkout develop")
-          Actions.sh("git branch -D #{result_branch}")
           Actions.sh("git checkout #{result_branch}")
-          Actions.sh("git pull #{result_branch}")
+          Actions.sh("git pull #{result_branch} &> /dev/null") # Using &> /dev/null for complete silence
           Helper.log.info "Successfully checkout branch #{result_branch}."
         end
 
