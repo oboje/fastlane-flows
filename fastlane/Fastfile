@@ -198,6 +198,11 @@ end
 
 desc "Prepares the build and uploads it to Fabric"
 private_lane :fabric do |options|
+  # Setting up the icon badge
+  shield_text = options[:shield_text]
+  shield_data = "#{shield_text}-#{version_number}.#{build_number}-blue"
+  badge(shield: shield_data, dark: true)
+
   # Refreshing provisioning profile
   extension_ids = options[:extension_identifiers]
   if extension_ids != nil
@@ -276,11 +281,6 @@ def pre_upload_action(options)
   build_number = current_build.to_i + 1
   update_build_and_version_number_with_extensions(options, build_number)
   Actions.lane_context[SharedValues::BUILD_NUMBER] = build_number
-
-  # Setting up the icon badge
-  shield_text = options[:shield_text]
-  shield_data = "#{shield_text}-#{version_number}.#{build_number}-blue"
-  badge(shield: shield_data, dark: true)
 
   # Runs all tests, stops deployment if there are any failures
   scan(
