@@ -9,7 +9,7 @@ module Fastlane
         remote_branch = params[:remote_branch]
         Actions.sh("git fetch")
         Actions.sh("git checkout #{remote_branch}")
-        Helper.log.info "Successfully checkout branch #{remote_branch}."
+        Actions.sh("git pull origin #{remote_branch}")
       end
 
       #####################################################

@@ -23,9 +23,11 @@ module Fastlane
           Actions.sh("git checkout #{result_branch}")
           Actions.sh("git push --set-upstream origin #{result_branch}")
         else
+          Actions.sh("git push --set-upstream origin #{result_branch}")
           Actions.sh("git checkout develop")
           Actions.sh("git branch -D #{result_branch}")
           Actions.sh("git checkout #{result_branch}")
+          Actions.sh("git pull #{result_branch}")
           Helper.log.info "Successfully checkout branch #{result_branch}."
         end
 
