@@ -22,6 +22,10 @@ lane :in_house do |options|
 
   # Setting up a new version
   current_version = get_version_number(xcodeproj: ENV['XCODEPROJ_NAME'])
+  current_build = get_info_plist_value(
+    path: ENV['INFO_PLIST_PATH'],
+    key: 'CFBundleVersion'
+  )
   options[:version_number] = current_version
 
   # Setting up the icon badge
