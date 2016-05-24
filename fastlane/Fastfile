@@ -32,12 +32,10 @@ lane :in_house do |options|
   options[:ftp_path] = 'dev'
 
   # Switching to ftp lane
-  unless changelog.empty?
-    ftp(options)
+  ftp(options)
 
-    # Setting output message
-    @result = "#{@name} #{current_version}.#{current_build} (nightly) uploaded to FTP \n https://appdistribution.rambler.ru/dev/index.html"
-  end
+  # Setting output message
+  @result = "#{@name} #{current_version}.#{current_build} (nightly) uploaded to FTP \n https://appdistribution.rambler.ru/dev/index.html"
 end
 
 desc "Submit a new nightly build from develop branch to FTP"
