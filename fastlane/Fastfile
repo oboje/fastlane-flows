@@ -220,6 +220,13 @@ end
 
 desc "Prepares the build and uploads it to Fabric"
 private_lane :fabric do |options|
+  # Getting version number
+  version_number = options[:version_number]
+  build_number = get_info_plist_value(
+    path: ENV['INFO_PLIST_PATH'],
+    key: 'CFBundleVersion'
+  )
+
   # Setting up the icon badge
   shield_text = options[:shield_text]
   shield_data = "#{shield_text}-#{version_number}.#{build_number}-blue"
