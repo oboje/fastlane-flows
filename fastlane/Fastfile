@@ -39,7 +39,7 @@ lane :in_house do |options|
   ftp(options)
 
   # Setting output message
-  @result = "#{@name} #{current_version}.#{current_build} (in-house) uploaded to FTP \n https://appdistribution.rambler.ru/dev/index.html"
+  @result = "#{@name} #{current_version}.#{current_build} (in-house) uploaded to FTP \nhttps://appdistribution.rambler.ru/dev/index.html"
 end
 
 desc "Submit a new nightly build from develop branch to FTP"
@@ -84,7 +84,7 @@ lane :nightly do |options|
     ftp(options)
 
     # Setting output message
-    @result = "#{@name} #{current_version}.#{current_build} (nightly) uploaded to FTP \n https://appdistribution.rambler.ru/nightly/index.html"
+    @result = "#{@name} #{current_version}.#{current_build} (nightly) uploaded to FTP \nhttps://appdistribution.rambler.ru/nightly/index.html"
   end
 end
 
