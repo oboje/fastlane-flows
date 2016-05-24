@@ -258,7 +258,10 @@ private_lane :apple_testflight do |options|
 
   # Uploading the final IPA file to Testflight (without distribution)
   ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
-  pilot(skip_submission: true)
+  pilot(
+    skip_submission: true,
+    changelog: @jira_changelog
+  )
 end
 
 ###################### LANE DECOMPOSITION ######################
