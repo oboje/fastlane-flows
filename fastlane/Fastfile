@@ -170,6 +170,7 @@ private_lane :ftp do |options|
   @name ||= @app_identifier
   @result = ''
   xcodeproj_name = ENV['XCODEPROJ_NAME']
+  team_id = @app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
 
   # Checking out the passed branch
   git_checkout(remote_branch: branch)
@@ -179,7 +180,7 @@ private_lane :ftp do |options|
   if extension_ids != nil
     make_provisioning_profiles_all_right('Release',options,false)
   else
-    sigh
+    sigh(team_id: team_id)
   end
 
   # Setting up the icon badge
