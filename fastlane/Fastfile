@@ -211,9 +211,7 @@ private_lane :ftp do |options|
   tags = options[:tags]
   multiple_tags(tags: tags)
 
-  # Some cleaning
-  clean_build_artifacts
-  clear_derived_data
+
 
   # Updating the build status for information messages
   @result = 'uploaded'

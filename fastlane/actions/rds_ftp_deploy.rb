@@ -21,7 +21,7 @@ module Fastlane
     end
     class RdsFtpDeployAction < Action
       def self.run(params)
-
+        UI.message "Starting FTP deploy"
         @ipa_path = params[:ipa_path]
         @app_identifier = params[:app_identifier]
         @name = params[:name]
@@ -50,7 +50,7 @@ module Fastlane
 
       # Формат названия папки {дата}
       def self.get_build_folder_name
-        "#{DateTime.now.to_s}"
+        "#{Date.today.to_s}"
       end
 
       def self.create_server_structure_if_needed
@@ -86,7 +86,7 @@ module Fastlane
 
         # Создаем и переходим в папку билда
         files = @ftp.nlst
-
+        UI.message "FTP folder name: #{@build_folder_name}"
         remove_folder if files.include?(@build_folder_name)
 
         @ftp.mkdir(@build_folder_name)
@@ -117,6 +117,7 @@ module Fastlane
 
       def self.remove_folder
         @ftp.nlst(@build_folder_name).each do |file|
+          UI.message "Deleting file: #{file}"
           @ftp.delete("#{file}")
         end
         @ftp.rmdir(@build_folder_name)
