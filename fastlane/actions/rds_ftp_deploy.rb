@@ -50,7 +50,7 @@ module Fastlane
 
       # Формат названия папки {дата}
       def self.get_build_folder_name
-        "#{Date.today.to_s}"
+        "#{DateTime.now.to_s}"
       end
 
       def self.create_server_structure_if_needed
