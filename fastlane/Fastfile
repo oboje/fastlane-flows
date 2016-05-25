@@ -180,6 +180,11 @@ private_lane :ftp do |options|
   if extension_ids != nil
     make_provisioning_profiles_all_right('Release',options,false)
   else
+    update_app_identifier(
+      xcodeproj: ENV['XCODEPROJ_NAME'],
+      app_identifier: @app_identifier,
+      plist_path: ENV['INFO_PLIST_PATH']
+    )
     sigh(team_id: team_id)
   end
 
